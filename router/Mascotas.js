@@ -58,5 +58,29 @@ router.get("/:id", async(req, res) => {
     }
 })
 
+router.delete("/:id", async(req, res) => {
+    const id = req.params.id
+
+    try {
+        const mascotaDB = await Mascota.findByIdAndDelete({ _id: id })
+
+        if (mascotaDB) {
+            res.json({
+                estado: true,
+                mensaje: "El objeto fue eliminado"
+            })
+        } else {
+
+            res.json({
+                estado: false,
+                mensaje: "Error al tratar de eliminar el elemento"
+            })
+        }
+
+    } catch (error) {
+        console.log(`Error al tratar de eliminar el elemento seleccionado ${error}`)
+    }
+})
+
 
 module.exports = router;
