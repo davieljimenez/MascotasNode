@@ -1,5 +1,13 @@
 <%- include("template/cabecera", {tituloWeb: "Mascotas🦖🦈🐷"})  %>
     <div class="container">
+
+        <h1>CRUD MONGODB</h1>
+
+        <a href="mascotas/crear">
+            <button class="btn btn-success btn-block my-4">
+            Crear nueva Mascota🦖🦈🐷
+            </button>
+        </a>
         <table class="table">
             <thead>
                 <tr>
@@ -23,7 +31,7 @@
                             <td>
                                 <%= mascota.descripcion %>
                             </td>
-                            <td>@mdo</td>
+                            <td><a href="mascotas/<%= mascota.id %>" class="btn btn-warning btn-sm">Editar</a></td>
                         </tr>
                         <% }) %>
                             <% } %>

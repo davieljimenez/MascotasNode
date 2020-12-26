@@ -21,4 +21,42 @@ router.get("/", async(req, res) => {
 
 })
 
+router.get("/crear", (req, res) => {
+    res.render("crear")
+
+})
+
+router.post("/", async(req, res) => {
+    const body = req.body
+    try {
+
+        await Mascota.create(body)
+
+        res.redirect("/mascotas")
+
+    } catch (error) {
+        console.log(`Error al intentar agregar una mascota ${error}`)
+    }
+})
+
+router.get("/:id", async(req, res) => {
+    const id = req.params.id
+
+    try {
+        const mascotaDB = await Mascota.findOne({ _id: id })
+
+        res.render("detalle", {
+            mascota: mascotaDB,
+            error: false
+        })
+
+    } catch (error) {
+        res.render("detalle", {
+            error: true,
+            mensaje: `Ha ocurrido un error al tratar de obtener la mascota seleccionada ${error}`
+        })
+    }
+})
+
+
 module.exports = router;
