@@ -1,23 +1,23 @@
 const express = require("express")
 const app = express();
 
+require("dotenv").config()
 
-const port = process.env.PORT || 3002;
+
+const port = process.env.PORT;
 
 //Conexion a BD:
 const mongoose = require('mongoose');
 
-const user = 'veterinariaUser'
-const password = 'UKTuHJEcwta7uFPF'
-const dbname = 'veterinaria'
-const uri = `mongodb+srv://${user}:${password}@cluster0.0mmnm.mongodb.net/${dbname}?retryWrites=true&w=majority`
+const uri = `mongodb+srv://${process.env.USER}:${process.env.PASSWORD}@cluster0.0mmnm.mongodb.net/${process.env.DBNAME}?retryWrites=true&w=majority`
+
 
 mongoose.connect(uri, {
         useNewUrlParser: true,
         useUnifiedTopology: true
     })
     .then(() => console.log("Base de datos conectada eficientemente"))
-    .catch(e => console.log(`Error al conectar la base de datos ${e}`))
+    .catch(e => console.log(`Error al conectar la base de datos... ${e}`))
 
 
 
